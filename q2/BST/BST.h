@@ -15,9 +15,10 @@ void freeNode(Node **aim);
 
 void deleteNode(Node **aim);
 
-void add(Node *root, const char *w);
+// Interface
+void add(Node **root, const char *w);
 
-void min(Node *root, const char *w);
+void min(Node **root, const char *w);
 
 void preorder(Node *root);
 

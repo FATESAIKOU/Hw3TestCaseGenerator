@@ -37,7 +37,3 @@ void delete(Node **aim) {
         delete(aim2);
     }
 }
-
-int main() {
-
-}

@@ -8,8 +8,6 @@ Q2 question & answer generator
 @argv[3]: question answer
 """
 
-import BST
-
 import sys
 import random
 import copy
@@ -17,40 +15,52 @@ import numpy as np
 
 
 def getNorm(mu, sigma):
-    return round(np.rando.normal(mu, sigma, 1)[0])
+    return round(np.random.normal(mu, sigma, 1)[0])
 
 
 def main():
     DIC = sys.argv[1]
     SEQ = sys.argv[2]
-    ANS = sys.argv[3]
+    # ANS = sys.argv[3]
     
     # load dic
+    print "[Info] Dict load"
     dic_src = open(DIC, 'r')
     words = str.splitlines(dic_src.read())
     dic_src.close()
 
     # set max total count
+    print "[Info] Total count set"
     total_count = random.randint(10, 1000)
 
     # select candidate words
+    print "[Info] Select candidate words"
     mu = 10
     sigma = 3
     cand_num = total_count / mu
-    cand_words = random.sample(words, cand_num)
+    cand_words = set(random.sample(words, cand_num))
 
     # set words distribution
+    print "[Info] Create words distribution"
     now_count = 0
     word_dist = {w: 0 for w in cand_words}
 
     while now_count < total_count:
-        w = random.choice(cand_words)
-        c = getNorm(mu, sigma)
+        w = random.sample(cand_words, 1)[0]
+        c = int(getNorm(mu, sigma))
         
         word_dist[w] += c
         now_count += c
 
+    for w in list(cand_words):
+        if word_dist[w] == 0:
+            word_dist.pop(w)
+            cand_words.discard(w)
+    
+    print "[Info] word_count:", now_count
+
     # create seq
+    print "[Info] Create sequence"
     seq = []
     create_dist = {w: 0 for w in cand_words}
     create_words = set(copy.copy(cand_words))
@@ -71,8 +81,10 @@ def main():
             create_words.discard(w)
 
     # create BST with seq
+    print "[Info] Create BST"
             
     # dump seq & bst(answer)
+    print "[Info] Dump seq & bst"
     seq_src = open(SEQ, 'w')
     seq_src.write('\n'.join(seq) + '\n')
     seq_src.close()
