@@ -26,7 +26,6 @@ def getNorm(mu, sigma):
 def main():
     DIC = sys.argv[1]
     SEQ = sys.argv[2]
-    # ANS = sys.argv[3]
     
     # load dic
     print "[Info] Dict load"
