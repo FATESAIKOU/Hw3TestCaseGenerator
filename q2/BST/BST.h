@@ -15,15 +15,19 @@ void freeNode(Node **aim);
 
 void deleteNode(Node **aim);
 
+void increase(Node **aim, const char *w);
+
+Node **find(Node **node, const char *w);
+
 // Interface
-void add(Node **root, const char *w);
+void add(Node **node, const char *w);
 
-void min(Node **root, const char *w);
+void min(Node **node, const char *w);
 
-void preorder(Node *root);
+void preorder(Node *node);
 
-void inorder(Node *root);
+void inorder(Node *node);
 
-void posorder(Node *root);
+void posorder(Node *node);
 
 #endif
