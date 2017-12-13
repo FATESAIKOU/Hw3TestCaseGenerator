@@ -25,7 +25,6 @@ int main(int argc, char *argv[]) {
     }
 
 
-    printf("---\n");
     preorder(bst_root);
     printf("---\n");
     inorder(bst_root);

@@ -5,13 +5,18 @@ Q2 question & answer generator
 @author: FATESAIKOU
 @argv[1]: dic file
 @argv[2]: question input sequence
-@argv[3]: question answer
+@argv[3]: question answer(preorder)
+@argv[4]: question answer(inorder)
+@argv[5]: question answer(posorder)
 """
 
 import sys
 import random
 import copy
+import os
 import numpy as np
+
+from pprint import pprint
 
 
 def getNorm(mu, sigma):
@@ -56,6 +61,7 @@ def main():
         if word_dist[w] == 0:
             word_dist.pop(w)
             cand_words.discard(w)
+    pprint(word_dist);
     
     print "[Info] word_count:", now_count
 
@@ -80,15 +86,22 @@ def main():
             create_dist.pop(w)
             create_words.discard(w)
 
-    # create BST with seq
-    print "[Info] Create BST"
-            
-    # dump seq & bst(answer)
+    # dump seq
     print "[Info] Dump seq & bst"
     seq_src = open(SEQ, 'w')
     seq_src.write('\n'.join(seq) + '\n')
     seq_src.close()
 
+    # create BST with seq
+    print "[Info] Create BST"
+    outputs = os.popen("./BST/bst " + SEQ + " 2>&1").read()
+    orders = str.split(outputs, '---\n');
+
+    # dump preorder, inorder, posorder file
+    for i in [0, 1, 2]:
+        src = open(sys.argv[3 + i], 'w')
+        src.write(orders[i])
+        src.close()
 
 if __name__ == "__main__":
     main()
