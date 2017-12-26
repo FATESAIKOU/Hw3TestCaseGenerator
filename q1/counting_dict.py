@@ -5,6 +5,7 @@ Q1 python sample.
 @author: FATESAIKOU
 @argv[1]: text file
 @argv[2]: dic file
+@argv[3]: res file
 """
 
 import sys
@@ -19,6 +20,7 @@ def createDic(dic_content):
 def main():
     TXT = sys.argv[1]
     DIC = sys.argv[2]
+    RES = sys.argv[3]
 
     # dic init
     print "[Info] Dict Init"
@@ -57,9 +59,14 @@ def main():
     words.sort(key=lambda w: w[0])
 
     # print result
-    print "[Info] Find result"
+    print "[Info] Print result"
+    s = ''
     for w in words:
-        print w[0], w[1]
+        s += str(w[0]) + ' ' + str(w[1]) + '\n'
+
+    dst = open(RES, 'w')
+    dst.write(s)
+    dst.close()
 
 
 if __name__ == "__main__":
