@@ -95,8 +95,8 @@ void preorder(Node *node) {
     if(node == NULL) return;
 
     printf("%s %d\n", node->word, node->count);
-    inorder(node->left_node);
-    inorder(node->right_node);
+    preorder(node->left_node);
+    preorder(node->right_node);
 }
 
 void inorder(Node *node) {
@@ -110,7 +110,8 @@ void inorder(Node *node) {
 void posorder(Node *node) {
     if(node == NULL) return;
 
-    inorder(node->left_node);
-    inorder(node->right_node);
+    posorder(node->left_node);
+
+    posorder(node->right_node);
     printf("%s %d\n", node->word, node->count);
 }
