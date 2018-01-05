@@ -73,9 +73,9 @@ def main():
 
     # generate answer
     print "[Info] Generator answer"
-    for i in xrange(real_size):
-        for j in xrange(real_size):
-            for k in xrange(real_size):
+    for k in xrange(real_size):
+        for i in xrange(real_size):
+            for j in xrange(real_size):
                 if array[i, k] != -1 and array[k, j] != -1 and \
                     (array[i, k] + array[k, j] < array[i, j]):
                     array[i, j] = array[i, k] + array[k, j]
